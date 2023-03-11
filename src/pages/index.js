@@ -1,11 +1,14 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { data: session } = useSession();
   return (
     <>
       <Head>
@@ -14,7 +17,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className={`${styles.main} container`}>
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
@@ -24,9 +27,8 @@ export default function Home() {
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
               target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
+              rel="noopener noreferrer">
+              By{" "}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
@@ -38,6 +40,33 @@ export default function Home() {
             </a>
           </div>
         </div>
+        <p>
+          <Link
+            className="bg-red-200 text-blue-900 p-2 rounded mx-1"
+            href={"/login"}>
+            Login
+          </Link>
+          <Link
+            className="bg-red-200 text-blue-900 p-2 rounded mx-1"
+            href={"/home"}>
+            Home
+          </Link>
+          <Link
+            className="bg-red-200 text-blue-900 p-2 rounded mx-1"
+            href={"/user"}>
+            User
+          </Link>
+          <button
+            onClick={signIn}
+            className="bg-red-200 text-blue-900 p-2 rounded mx-1">
+            Sign in
+          </button>
+          <button
+            onClick={signOut}
+            className="bg-red-200 text-blue-900 p-2 rounded mx-1">
+            Sign out
+          </button>
+        </p>
 
         <div className={styles.center}>
           <Image
@@ -64,8 +93,7 @@ export default function Home() {
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <h2 className={inter.className}>
               Docs <span>-&gt;</span>
             </h2>
@@ -78,8 +106,7 @@ export default function Home() {
             href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <h2 className={inter.className}>
               Learn <span>-&gt;</span>
             </h2>
@@ -92,8 +119,7 @@ export default function Home() {
             href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <h2 className={inter.className}>
               Templates <span>-&gt;</span>
             </h2>
@@ -106,8 +132,7 @@ export default function Home() {
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <h2 className={inter.className}>
               Deploy <span>-&gt;</span>
             </h2>
@@ -119,5 +144,5 @@ export default function Home() {
         </div>
       </main>
     </>
-  )
+  );
 }
